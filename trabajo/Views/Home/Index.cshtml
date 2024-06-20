@@ -1,7 +1,8 @@
-﻿@{
+﻿@model IEnumerable<trabajo.Models.Producto>
+
+@{
     ViewData["Title"] = "Home Page";
 }
-
 
 <div class="header">
     <h1>La Bondioleta</h1>
@@ -9,51 +10,21 @@
 <div class="container my-2">
     <div class="row">
         <!-- Lista de productos -->
-        <div class="col-md-8">
-            <div class="card mb-4 product-card">
-                <div class="card-body d-flex">
-                    <img src="https://via.placeholder.com/100" class="product-img" alt="Hamburguesa">
-                    <div>
-                        <h5 class="card-title">Hamburguesa</h5>
-                        <p class="card-text">Deliciosa hamburguesa con queso, lechuga y tomate.</p>
-                        <p class="card-text">$8.00</p>
-                        <button class="btn btn-primary add-to-cart" data-name="Hamburguesa" data-price="8.00">Agregar al carrito</button>
+        <div class="col-md-8" id="productos-list">
+            @foreach (var producto in Model)
+            {
+                <div class="card mb-4 product-card">
+                    <div class="card-body d-flex">
+                        <img src="@Url.Content("~/images/" + producto.NombreImagen)" class="product-img" alt="@producto.Nombre">
+                        <div>
+                            <h5 class="card-title">@producto.Nombre</h5>
+                            <p class="card-text">@producto.Descripcion</p>
+                            <p class="card-text">$@producto.Precio</p>
+                            <button class="btn btn-primary add-to-cart" data-name="@producto.Nombre" data-price="@producto.Precio">Agregar al carrito</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card mb-4 product-card">
-                <div class="card-body d-flex">
-                    <img src="https://via.placeholder.com/100" class="product-img" alt="Pizza">
-                    <div>
-                        <h5 class="card-title">Pizza</h5>
-                        <p class="card-text">Pizza con pepperoni, queso mozzarella y salsa de tomate.</p>
-                        <p class="card-text">$12.00</p>
-                        <button class="btn btn-primary add-to-cart" data-name="Pizza" data-price="12.00">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-4 product-card">
-                <div class="card-body d-flex">
-                    <img src="https://via.placeholder.com/100" class="product-img" alt="Papas Fritas">
-                    <div>
-                        <h5 class="card-title">Papas Fritas</h5>
-                        <p class="card-text">Crujientes papas fritas acompañadas de ketchup.</p>
-                        <p class="card-text">$5.00</p>
-                        <button class="btn btn-primary add-to-cart" data-name="Papas Fritas" data-price="5.00">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-4 product-card">
-                <div class="card-body d-flex">
-                    <img src="https://via.placeholder.com/100" class="product-img" alt="Refresco">
-                    <div>
-                        <h5 class="card-title">Refresco</h5>
-                        <p class="card-text">Bebida refrescante de tu elección.</p>
-                        <p class="card-text">$3.00</p>
-                        <button class="btn btn-primary add-to-cart" data-name="Refresco" data-price="3.00">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
         <!-- Cart -->
         <div class="col-md-4">

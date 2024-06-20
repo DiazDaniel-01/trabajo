@@ -1,18 +1,19 @@
 ﻿document.addEventListener('DOMContentLoaded', () => {
     const cartItems = document.getElementById('cart-items');
     const cartTotal = document.getElementById('cart-total');
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-
     let cart = [];
 
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const name = button.getAttribute('data-name');
-            const price = parseFloat(button.getAttribute('data-price'));
-            addItemToCart(name, price);
-            displayCart();
+    function bindAddToCartButtons() {
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const name = button.getAttribute('data-name');
+                const price = parseFloat(button.getAttribute('data-price'));
+                addItemToCart(name, price);
+                displayCart();
+            });
         });
-    });
+    }
 
     function addItemToCart(name, price) {
         for (let item of cart) {
@@ -64,4 +65,7 @@
             }
         }
     }
+
+    // Bind the add to cart buttons initially
+    bindAddToCartButtons();
 });
