@@ -56,10 +56,22 @@ namespace trabajo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdProducto,IdCategoria,Nombre,Descripcion,Precio,RutaImagen,NombreImagen,FechaCarga")] Producto producto)
+        public async Task<IActionResult> Create([Bind("IdProducto,IdCategoria,Nombre,Descripcion,Precio,RutaImagen,NombreImagen,FechaCarga")] Producto producto, IFormFile archivoImagen)
         {
             if (ModelState.IsValid)
             {
+                if (archivoImagen != null && archivoImagen.Length > 0)
+                {
+                    var fileName = Path.GetFileName(archivoImagen.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await archivoImagen.CopyToAsync(stream);
+                    }
+
+                    producto.NombreImagen = fileName;
+                    producto.RutaImagen = "/images/" + fileName;
+                }
                 _context.Add(producto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
