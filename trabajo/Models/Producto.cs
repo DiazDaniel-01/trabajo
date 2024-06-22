@@ -19,7 +19,6 @@ namespace trabajo.Models
         public string? RutaImagen { get; set; }
         public string? NombreImagen { get; set; }
         public DateTime? FechaCarga { get; set; }
-
         public virtual Categoria? IdCategoriaNavigation { get; set; }
         public virtual ICollection<Carrito> Carritos { get; set; }
         public virtual ICollection<DetalleVenta> DetalleVenta { get; set; }

@@ -83,6 +83,8 @@ namespace trabajo.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCategoria"] = new SelectList(_context.Categoria, "IdCategoria", "Descripcion", producto.IdCategoria);
+
+            ViewData["RutaImagen"] = producto.RutaImagen;
             return View(producto);
         }
 
@@ -196,6 +198,8 @@ namespace trabajo.Controllers
                 return NotFound();
             }
 
+            ViewData["RutaImagen"] = producto.RutaImagen;
+
             return View(producto);
         }
 
@@ -225,6 +229,7 @@ namespace trabajo.Controllers
                 _context.Productos.Remove(producto);
                 await _context.SaveChangesAsync();
             }
+            
 
             return RedirectToAction(nameof(Index));
         }

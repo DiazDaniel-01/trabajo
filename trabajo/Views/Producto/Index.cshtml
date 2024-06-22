@@ -4,35 +4,20 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Lista de Productos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success">Crear Nuevo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Precio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RutaImagen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreImagen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaCarga)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCategoriaNavigation)
-            </th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Imagen</th>
+            <th>Fecha de Carga</th>
+            <th>Categoria</th>
             <th></th>
         </tr>
     </thead>
@@ -46,24 +31,21 @@
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Precio)
+                $@Html.DisplayFor(modelItem => item.Precio)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RutaImagen)
+                <img src="@Url.Content("~/images/" + item.NombreImagen)" class="product-img" alt="@item.Nombre" />
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NombreImagen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaCarga)
+                @item.FechaCarga?.ToString("dd/MM/yy")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdCategoriaNavigation.Descripcion)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdProducto">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdProducto">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdProducto">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdProducto" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdProducto" class="btn btn-warning btn-sm ms-2"><i class="fa fa-info-circle"></i>  Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdProducto" class="btn btn-danger btn-sm ms-2"><i class="fa fa-trash"></i> Delete</a>
             </td>
         </tr>
 }
