@@ -16,10 +16,11 @@ namespace trabajo.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var productos = await _context.Productos.ToListAsync();
-            return View(productos);
+            var productos = _context.Productos.Include(p => p.IdCategoriaNavigation).ToList();
+            var productosPorCategoria = productos.GroupBy(p => p.IdCategoriaNavigation).ToList();
+            return View(productosPorCategoria);
         }
 
         public IActionResult Privacy()

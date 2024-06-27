@@ -4,50 +4,58 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Lista de Productos</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-success">Crear Nuevo</a>
+    
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Precio</th>
-            <th>Imagen</th>
-            <th>Fecha de Carga</th>
-            <th>Categoria</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                $@Html.DisplayFor(modelItem => item.Precio)
-            </td>
-            <td>
-                <img src="@Url.Content("~/images/" + item.NombreImagen)" class="product-img" alt="@item.Nombre" />
-            </td>
-            <td>
-                @item.FechaCarga?.ToString("dd/MM/yy")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCategoriaNavigation.Descripcion)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdProducto" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdProducto" class="btn btn-warning btn-sm ms-2"><i class="fa fa-info-circle"></i>  Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdProducto" class="btn btn-danger btn-sm ms-2"><i class="fa fa-trash"></i> Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container py-6">
+    <h1>Lista de Productos</h1>
+
+    <a asp-action="Create" class="btn btn-success">Crear Nuevo</a>
+    <p>
+    <div class="table-responsive">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Imagen</th>
+                    <th>Fecha de Carga</th>
+                    <th>Categoria</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                            $@Html.DisplayFor(modelItem => item.Precio)
+                        </td>
+                        <td>
+                            <img src="@Url.Content("~/images/" + item.NombreImagen)" class="product-images" alt="@item.Nombre" />
+                        </td>
+                        <td>
+                            @item.FechaCarga?.ToString("dd/MM/yy")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdCategoriaNavigation.Descripcion)
+                        </td>
+                        <td class="action-column">
+                            <a asp-action="Edit" asp-route-id="@item.IdProducto" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.IdProducto" class="btn btn-warning btn-sm ms-2"><i class="fa fa-info-circle"></i> Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdProducto" class="btn btn-danger btn-sm ms-2"><i class="fa fa-trash"></i> Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

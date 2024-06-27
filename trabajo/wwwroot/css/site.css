@@ -1,6 +1,12 @@
+:root {
+    --primario: #FEA116;
+}
+
 html {
   font-size: 14px;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
 
 @media (min-width: 768px) {
   html {
@@ -8,12 +14,24 @@ html {
   }
 }
 
+.action-column {
+    min-width: 300px; /* Ajusta este valor según sea necesario */
+}
+
+.text-primario {
+    color: var(--primario) !important;
+
+}
+
 body {
     background-color: #f8f9fa;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .product-card {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
     transition: transform 0.3s;
 }
 
@@ -30,8 +48,7 @@ body {
     }
 
 .header {
-    background-color: #343a40;
-    color: white;
+    color: #343a40;
     padding: 1rem 0;
     text-align: center;
 }
@@ -46,8 +63,14 @@ body {
     }
 
 .product-img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.product-images {
     max-width: 100px;
     max-height: 100px;
     object-fit: cover;
-    margin-right: 1rem;
 }
